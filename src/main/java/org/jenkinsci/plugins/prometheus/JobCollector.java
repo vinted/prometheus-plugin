@@ -380,6 +380,12 @@ public class JobCollector extends Collector {
 
         buildMetrics.jobBuildStartMillis.labels(buildLabelValueArray).set(millis);
 
+        boolean isCollectStageMetrics = PrometheusConfiguration.get().isCollectStageMetrics();
+
+        if (!isCollectStageMetrics) {
+            logger.debug("ignore stage metrics for run [{}] from job [{}]", run.getNumber(), job.getName());
+            return;
+        }
 
         if (!run.isBuilding()) {
             buildMetrics.jobBuildDuration.labels(buildLabelValueArray).set(duration);
