@@ -59,6 +59,7 @@ public class PrometheusConfiguration extends GlobalConfiguration {
 
     private boolean collectDiskUsage = true;
     private boolean collectNodeStatus = true;
+    private boolean collectStageMetrics = true;
 
 
     public PrometheusConfiguration() {
@@ -92,6 +93,7 @@ public class PrometheusConfiguration extends GlobalConfiguration {
         appendStatusLabel = json.getBoolean("appendStatusLabel");
         perBuildMetrics = json.getBoolean("perBuildMetrics");
         collectNodeStatus = json.getBoolean("collectNodeStatus");
+        collectStageMetrics = json.getBoolean("collectStageMetrics");
 
         labeledBuildParameterNames = json.getString("labeledBuildParameterNames");
 
@@ -258,6 +260,15 @@ public class PrometheusConfiguration extends GlobalConfiguration {
 
     public boolean isCollectNodeStatus() {
         return collectNodeStatus;
+    }
+
+    public boolean isCollectStageMetrics() {
+        return collectStageMetrics;
+    }
+
+    public void setCollectStageMetrics(boolean collectStageMetrics) {
+        this.collectStageMetrics = collectStageMetrics;
+        save();
     }
 
     public void setPerBuildMetrics(boolean perBuildMetrics) {
